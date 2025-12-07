@@ -1,0 +1,551 @@
+<!-- Dedicated to God the Father -->
+<!-- All Rights Reserved Christopher Andrew Topalian Copyright 2000-2025 -->
+<!-- https://github.com/ChristopherTopalian -->
+<!-- https://github.com/ChristopherAndrewTopalian -->
+<!-- CATopalian_JavaScript_True_AI_Logic_Gates.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title> CATopalian JavaScript True AI Logic Gates </title>
+
+<meta charset = 'UTF-8'>
+
+<style>
+
+body
+{
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: 'Arial', sans-serif;
+}
+
+</style>
+
+<script>
+
+// shortcuts
+
+function ge(whichId)
+{
+    let result = document.getElementById(whichId);
+    return result;
+}
+
+function ce(whichType)
+{
+    let result = document.createElement(whichType);
+    return result;
+}
+
+function ba(whichElement)
+{
+    let result = document.body.append(whichElement);
+    return result;
+}
+
+function cl(whichMessage)
+{
+    let result = console.log(whichMessage);
+    return result;
+}
+
+//----//
+
+// DATA
+
+// AND (0001)
+let and = {
+    name: 'AND',
+    otherName1: 'Conjunction',
+    symbol1: '∧', symbol2: '&', symbol3: '·', symbol4: 'K',
+    boolIf: 'if (a == 1 && b == 1)',
+    truthTableLineOne: '0 0 = 0', truthTableLineTwo: '0 1 = 0', truthTableLineThree: '1 0 = 0', truthTableLineFour: '1 1 = 1',
+    truthTableSummary: '0001',
+    opposite: 'NAND'
+};
+
+// NAND (1110)
+let nand = {
+    name: 'NAND',
+    otherName1: 'Sheffer Stroke',
+    otherName2: 'NOT AND',
+    symbol1: '↑', symbol2: '⊼', symbol3: '¬∧', symbol4: 'D',
+    boolIf: 'if (a == 0 || b == 0)',
+    truthTableLineOne: '0 0 = 1', truthTableLineTwo: '0 1 = 1', truthTableLineThree: '1 0 = 1', truthTableLineFour: '1 1 = 0',
+    truthTableSummary: '1110', opposite: 'AND'
+};
+
+// OR (0111)
+let or = {
+    name: 'OR',
+    otherName1: 'Disjunction',
+    symbol1: '∨', symbol2: '+', symbol3: '∥', symbol4: 'A',
+    boolIf: 'if (a == 1 || b == 1)',
+    truthTableLineOne: '0 0 = 0', truthTableLineTwo: '0 1 = 1', truthTableLineThree: '1 0 = 1', truthTableLineFour: '1 1 = 1',
+    truthTableSummary: '0111', opposite: 'NOR'
+};
+
+// NOR (1000)
+let nor = {
+    name: 'NOR',
+    otherName1: 'Peirce Arrow',
+    otherName2: 'NOT OR',
+    symbol1: '↓', symbol2: '⊽', symbol3: '¬∨', symbol4: 'X',
+    boolIf: 'if (a == 0 && b == 0)',
+    truthTableLineOne: '0 0 = 1', truthTableLineTwo: '0 1 = 0', truthTableLineThree: '1 0 = 0', truthTableLineFour: '1 1 = 0',
+    truthTableSummary: '1000', opposite: 'OR'
+};
+
+// XOR (0110)
+let xor = {
+    name: 'XOR',
+    otherName1: 'Exclusive OR',
+    symbol1: '⊕', symbol2: '⊻', symbol3: '≢', symbol4: 'J',
+    boolIf: 'if ((a == 1 && b == 0) || (a == 0 && b == 1))',
+    truthTableLineOne: '0 0 = 0', truthTableLineTwo: '0 1 = 1', truthTableLineThree: '1 0 = 1', truthTableLineFour: '1 1 = 0',
+    truthTableSummary: '0110', opposite: 'XNOR'
+};
+
+// XNOR (1001)
+let xnor = {
+    name: 'XNOR',
+    otherName1: 'Equivalence',
+    otherName2: 'Exclusive NOT OR',
+    symbol1: '⊙', symbol2: '↔', symbol3: '≡', symbol4: 'E',
+    boolIf: 'if ((a == 0 && b == 0) || (a == 1 && b == 1))',
+    truthTableLineOne: '0 0 = 1', truthTableLineTwo: '0 1 = 0', truthTableLineThree: '1 0 = 0', truthTableLineFour: '1 1 = 1',
+    truthTableSummary: '1001', opposite: 'XOR'
+};
+
+// LP (0011)
+let lp = {
+    name: 'LP',
+    otherName1: 'Left Projection',
+    symbol1: 'A', symbol2: 'P', symbol3: 'π₁', symbol4: 'I',
+    boolIf: 'if (a == 1)',
+    truthTableLineOne: '0 0 = 0', truthTableLineTwo: '0 1 = 0', truthTableLineThree: '1 0 = 1', truthTableLineFour: '1 1 = 1',
+    truthTableSummary: '0011', opposite: 'LC'
+};
+
+// LC (1100)
+let lc = {
+    name: 'LC',
+    otherName1: 'Left Complementation',
+    symbol1: '¬A', symbol2: '!A', symbol3: 'A̅', symbol4: 'C',
+    boolIf: 'if (a == 0)',
+    truthTableLineOne: '0 0 = 1', truthTableLineTwo: '0 1 = 1', truthTableLineThree: '1 0 = 0', truthTableLineFour: '1 1 = 0',
+    truthTableSummary: '1100', opposite: 'LP'
+};
+
+// CI (1011)
+let ci = {
+    name: 'CI',
+    otherName1: 'Converse Implication',
+    symbol1: '←', symbol2: '⊂', symbol3: '⊐', symbol4: 'B',
+    boolIf: 'if (a == 1 || b == 0)',
+    truthTableLineOne: '0 0 = 1', truthTableLineTwo: '0 1 = 0', truthTableLineThree: '1 0 = 1', truthTableLineFour: '1 1 = 1',
+    truthTableSummary: '1011', opposite: 'CNI'
+};
+
+// CNI (0100)
+let cni = {
+    name: 'CNI',
+    otherName1: 'Converse Non-Implication',
+    symbol1: '↚', symbol2: '⊅', symbol3: 'B-A', symbol4: 'M',
+    boolIf: 'if (a == 0 && b == 1)',
+    truthTableLineOne: '0 0 = 0', truthTableLineTwo: '0 1 = 1', truthTableLineThree: '1 0 = 0', truthTableLineFour: '1 1 = 0',
+    truthTableSummary: '0100', opposite: 'CI'
+};
+
+// RP (0101)
+let rp = {
+    name: 'RP',
+    otherName1: 'Right Projection',
+    symbol1: 'B', symbol2: 'Q', symbol3: 'π₂', symbol4: 'H',
+    boolIf: 'if (b == 1)',
+    truthTableLineOne: '0 0 = 0', truthTableLineTwo: '0 1 = 1', truthTableLineThree: '1 0 = 0', truthTableLineFour: '1 1 = 1',
+    truthTableSummary: '0101', opposite: 'RC'
+};
+
+// RC (1010)
+let rc = {
+    name: 'RC',
+    otherName1: 'Right Complementation',
+    symbol1: '¬B', symbol2: '!B', symbol3: 'B̅', symbol4: 'G',
+    boolIf: 'if (b == 0)',
+    truthTableLineOne: '0 0 = 1', truthTableLineTwo: '0 1 = 0', truthTableLineThree: '1 0 = 1', truthTableLineFour: '1 1 = 0',
+    truthTableSummary: '1010', opposite: 'RP'
+};
+
+// MI (1101)
+let mi = {
+    name: 'MI',
+    otherName1: 'Material Implication',
+    symbol1: '→', symbol2: '⊃', symbol3: '⇒', symbol4: 'C',
+    boolIf: 'if (a == 0 || b == 1)',
+    truthTableLineOne: '0 0 = 1', truthTableLineTwo: '0 1 = 1', truthTableLineThree: '1 0 = 0', truthTableLineFour: '1 1 = 1',
+    truthTableSummary: '1101', opposite: 'MNI'
+};
+
+// MNI (0010)
+let mni = {
+    name: 'MNI',
+    otherName1: 'Material Non-Implication',
+    symbol1: '↛', symbol2: '⊄', symbol3: 'A-B', symbol4: 'L',
+    boolIf: 'if (a == 1 && b == 0)',
+    truthTableLineOne: '0 0 = 0', truthTableLineTwo: '0 1 = 0', truthTableLineThree: '1 0 = 1', truthTableLineFour: '1 1 = 0',
+    truthTableSummary: '0010', opposite: 'MI'
+};
+
+// TAUTOLOGY (1111)
+let tautology = {
+    name: 'TAUTOLOGY',
+    otherName1: 'Always True',
+    symbol1: '⊤', symbol2: '1', symbol3: 'T', symbol4: 'V',
+    boolIf: 'if ((a == 0 && b == 0) || (a == 0 && b == 1) || (a == 1 && b == 0) || (a == 1 && b == 1)) return 1;',
+    truthTableLineOne: '0 0 = 1', truthTableLineTwo: '0 1 = 1', truthTableLineThree: '1 0 = 1', truthTableLineFour: '1 1 = 1',
+    truthTableSummary: '1111', opposite: 'CONTRADICTION'
+};
+
+// CONTRADICTION (0000)
+let contradiction = {
+    name: 'CONTRADICTION',
+    otherName1: 'Always False',
+    symbol1: '⊥', symbol2: '0', symbol3: 'F', symbol4: 'O',
+    boolIf: 'if ((a == 0 && b == 0) || (a == 0 && b == 1) || (a == 1 && b == 0) || (a == 1 && b == 1)) return 0;',
+    truthTableLineOne: '0 0 = 0', truthTableLineTwo: '0 1 = 0', truthTableLineThree: '1 0 = 0', truthTableLineFour: '1 1 = 0',
+    truthTableSummary: '0000', opposite: 'TAUTOLOGY'
+};
+
+let logic_gates = [];
+logic_gates.push(
+    and, nand,
+    xor, xnor,
+    or, nor,
+    rp, rc,
+    lp, lc,
+    ci, cni,
+    mi, mni,
+    tautology, contradiction
+);
+
+//----//
+
+function makeLogicGateDiagram(truthTableSummary)
+{
+    // diagram Colors
+    let colorActive = 'rgb(30, 144, 255)'; // dodger blue
+    let colorInactive = 'white';
+    let borderColor = 'black';
+
+    // Parse Summary String
+    // Index 0: 0,0 (Background/Universe)
+    // Index 1: 0,1 (Right/B only)
+    // Index 2: 1,0 (Left/A only)
+    // Index 3: 1,1 (Center/Overlap)
+    let s = truthTableSummary;
+    let bgActive = (s[0] === '1');
+    let rightActive = (s[1] === '1');
+    let leftActive = (s[2] === '1');
+    let centerActive = (s[3] === '1');
+
+    //-//
+
+    // main diagram container
+    let diagramBox = ce('div');
+    diagramBox.style.width = '70px';
+    diagramBox.style.height = '40px';
+    diagramBox.style.position = 'relative';
+    diagramBox.style.border = '2px solid black';
+    diagramBox.style.margin = '10px auto'; // auto centers it
+    // set Background Color
+    diagramBox.style.backgroundColor = bgActive ? colorActive : colorInactive;
+
+    // we need 3 distinct fill zones to control colors, 
+    // plus 2 outlines on top to simulate the boxes.
+
+    // LEFT FILL (A excluding B)
+    let fillLeft = ce('div');
+    fillLeft.style.position = 'absolute';
+    fillLeft.style.top = '5px';
+    fillLeft.style.left = '5px';
+    fillLeft.style.width = '20px';
+    fillLeft.style.height = '30px';
+    fillLeft.style.backgroundColor = leftActive ? colorActive : colorInactive;
+    fillLeft.style.zIndex = '1';
+    diagramBox.append(fillLeft);
+
+    // CENTER FILL (Intersection)
+    let fillCenter = ce('div');
+    fillCenter.style.position = 'absolute';
+    fillCenter.style.top = '5px';
+    fillCenter.style.left = '25px'; // Starts where Left ends
+    fillCenter.style.width = '20px';
+    fillCenter.style.height = '30px';
+    fillCenter.style.backgroundColor = centerActive ? colorActive : colorInactive;
+    fillCenter.style.zIndex = '1';
+    diagramBox.append(fillCenter);
+
+    // RIGHT FILL (B excluding A)
+    let fillRight = ce('div');
+    fillRight.style.position = 'absolute';
+    fillRight.style.top = '5px';
+    fillRight.style.left = '45px'; // Starts where Center ends
+    fillRight.style.width = '20px';
+    fillRight.style.height = '30px';
+    fillRight.style.backgroundColor = rightActive ? colorActive : colorInactive;
+    fillRight.style.zIndex = '1';
+    diagramBox.append(fillRight);
+
+    // LEFT BOX OUTLINE
+    let outlineLeft = ce('div');
+    outlineLeft.style.position = 'absolute';
+    outlineLeft.style.top = '5px';
+    outlineLeft.style.left = '5px';
+    outlineLeft.style.width = '40px'; // Spans Left + Center
+    outlineLeft.style.height = '30px';
+    outlineLeft.style.border = '2px solid ' + borderColor;
+    outlineLeft.style.boxSizing = 'border-box'; 
+    outlineLeft.style.zIndex = '2'; // On top of fills
+    diagramBox.append(outlineLeft);
+
+    // RIGHT BOX OUTLINE
+    let outlineRight = ce('div');
+    outlineRight.style.position = 'absolute';
+    outlineRight.style.top = '5px';
+    outlineRight.style.right = '5px'; // anchored right
+    outlineRight.style.width = '40px'; // spans Right + Center
+    outlineRight.style.height = '30px';
+    outlineRight.style.border = '2px solid ' + borderColor;
+    outlineRight.style.boxSizing = 'border-box';
+    outlineRight.style.zIndex = '2'; // on top of fills
+    diagramBox.append(outlineRight);
+
+    return diagramBox;
+}
+
+//----//
+
+function makeInterface(whichArray)
+{
+    let container = ce('div');
+    container.style.display = 'grid';
+    container.style.gridTemplateColumns = 'repeat(2, 1fr)';
+    container.style.gap = '20px';
+    container.style.padding = '20px';
+    container.style.width = '800px';
+    ba(container);
+
+    for (let x = 0; x < whichArray.length; x++)
+    {
+        let mainDiv = ce('div');
+        container.append(mainDiv);
+
+        //-//
+
+        let subDiv = ce('div');
+        subDiv.style.border = 'solid 1px rgb(255, 255, 255)';
+        subDiv.style.minHeight = '300px';
+        subDiv.style.width = '250px';
+        subDiv.style.borderRadius = '8px';
+        subDiv.style.display = 'flex';
+        subDiv.style.flexDirection = 'column'; 
+        subDiv.style.alignItems = 'center';    
+        subDiv.style.justifyContent = 'flex-start'; // start from top
+        subDiv.style.padding = '10px';
+        subDiv.style.position = 'relative'; 
+        mainDiv.append(subDiv);
+
+        //-//
+
+        let gateName = ce('div');
+        gateName.textContent = whichArray[x].name;
+        gateName.style.textAlign = 'center';
+        gateName.style.fontWeight = 'bold';
+        gateName.style.fontSize = '22px';
+        gateName.style.marginBottom = '5px';
+        subDiv.append(gateName);
+
+        //-//
+
+        let truthTableContainer = ce('div');
+        truthTableContainer.style.width = '100px';
+        truthTableContainer.style.padding = '5px';
+        truthTableContainer.style.display = 'flex';
+        truthTableContainer.style.flexDirection = 'column';
+        subDiv.append(truthTableContainer);
+
+        //-//
+
+        // lines
+        let tableStyle = 'solid 1px rgb(85, 85, 85)';
+
+        let truthTableLineOne = ce('div');
+        truthTableLineOne.textContent = whichArray[x].truthTableLineOne;
+        truthTableLineOne.style.border = tableStyle;
+        truthTableLineOne.style.textAlign = 'center';
+        truthTableContainer.append(truthTableLineOne);
+
+        //-//
+
+        let truthTableLineTwo = ce('div');
+        truthTableLineTwo.textContent = whichArray[x].truthTableLineTwo;
+        truthTableLineTwo.style.border = tableStyle;
+        truthTableLineTwo.style.textAlign = 'center';
+        truthTableContainer.append(truthTableLineTwo);
+
+        //-//
+
+        let truthTableLineThree = ce('div');
+        truthTableLineThree.textContent = whichArray[x].truthTableLineThree;
+        truthTableLineThree.style.border = tableStyle;
+        truthTableLineThree.style.textAlign = 'center';
+        truthTableContainer.append(truthTableLineThree);
+
+        //-//
+
+        let truthTableLineFour = ce('div');
+        truthTableLineFour.textContent = whichArray[x].truthTableLineFour;
+        truthTableLineFour.style.border = tableStyle;
+        truthTableLineFour.style.textAlign = 'center';
+        truthTableContainer.append(truthTableLineFour);
+
+        //-//
+
+        let logicDiagram = makeLogicGateDiagram(whichArray[x].truthTableSummary);
+        subDiv.append(logicDiagram);
+
+        //-//
+
+        // corner symbols 
+        let symbol1 = ce('div');
+        symbol1.textContent = whichArray[x].symbol1;
+        symbol1.style.position = 'absolute';
+        symbol1.style.fontSize = '20px';
+        symbol1.style.fontWeight = 'bold';
+        symbol1.style.padding = '5px';
+        symbol1.style.left = '5px';
+        symbol1.style.top = '0px';
+        subDiv.append(symbol1);
+
+        //-//
+
+        let symbol2 = ce('div');
+        symbol2.textContent = whichArray[x].symbol2;
+        symbol2.style.position = 'absolute';
+        symbol2.style.fontSize = '20px';
+        symbol2.style.fontWeight = 'bold';
+        symbol2.style.padding = '5px';
+        symbol2.style.right = '5px';
+        symbol2.style.top = '0px';
+        subDiv.append(symbol2);
+
+        //-//
+
+        let symbol3 = ce('div');
+        symbol3.textContent = whichArray[x].symbol3;
+        symbol3.style.position = 'absolute';
+        symbol3.style.fontSize = '20px';
+        symbol3.style.fontWeight = 'bold';
+        symbol3.style.padding = '5px';
+        symbol3.style.left = '5px';
+        symbol3.style.bottom = '0px';
+        subDiv.append(symbol3);
+
+        //-//
+
+        let symbol4 = ce('div');
+        symbol4.textContent = whichArray[x].symbol4;
+        symbol4.style.position = 'absolute';
+        symbol4.style.fontSize = '20px';
+        symbol4.style.fontWeight = 'bold';
+        symbol4.style.padding = '5px';
+        symbol4.style.right = '5px';
+        symbol4.style.bottom = '0px';
+        subDiv.append(symbol4);
+
+        //-//
+
+        let booleanIf = ce('div');
+        booleanIf.style.textAlign = 'center';
+        booleanIf.style.fontSize = '14px'; 
+        booleanIf.style.fontWeight = 'bold';
+        booleanIf.style.color = 'rgb(170, 170, 170)';
+        booleanIf.style.wordWrap = 'break-word';
+        booleanIf.style.maxWidth = '90%';
+        booleanIf.style.marginTop = '10px'; // space below diagram
+        booleanIf.textContent = whichArray[x].boolIf;
+        subDiv.append(booleanIf);
+
+        //-//
+
+        let namesContainer = ce('div');
+        namesContainer.style.textAlign = 'center';
+        namesContainer.style.color = 'rgb(0, 255, 255)';
+        namesContainer.style.marginTop = '10px';
+        subDiv.append(namesContainer);
+
+        //-//
+
+        let otherName1 = ce('div');
+        otherName1.textContent = whichArray[x].otherName1;
+        namesContainer.append(otherName1);
+
+        //-//
+
+        if (whichArray[x].otherName2)
+        {
+            let otherName2 = ce('div');
+            otherName2.textContent = whichArray[x].otherName2;
+            namesContainer.append(otherName2);
+        }
+
+        //-//
+
+        let oppositeGate = ce('div');
+        oppositeGate.textContent = "Opposite: " + whichArray[x].opposite;
+        oppositeGate.style.textAlign = 'center';
+        oppositeGate.style.color = 'rgb(100, 100, 100)';
+        oppositeGate.style.marginTop = 'auto'; // pushes to bottom
+        oppositeGate.style.marginBottom = '5px';
+        subDiv.append(oppositeGate);
+    }
+}
+
+// makeTitleOfApp.js
+
+function makeTitleOfApp()
+{
+    let titleOfApplication = ce("a");
+    titleOfApplication.style.position = 'absolute';
+    titleOfApplication.style.right = '7px';
+    titleOfApplication.style.top = '1px';
+    titleOfApplication.style.fontSize = '17px';
+    titleOfApplication.style.color = 'rgb(100, 100, 100)';
+    titleOfApplication.style.textDecoration = 'none';
+    titleOfApplication.style.fontWeight = 'bold';
+    titleOfApplication.href = 'https://github.com/ChristopherAndrewTopalian/CATopalian_JavaScript_True_AI_Logic_Gates'
+    titleOfApplication.target = '_blank';
+    titleOfApplication.textContent = ' CATopalian JavaScript True AI Logic Gates';
+    ba(titleOfApplication);
+}
+
+//----//
+
+function whenLoaded()
+{
+    makeInterface(logic_gates);
+    makeTitleOfApp();
+}
+
+</script>
+
+</head>
+
+<body onload = 'whenLoaded();'>
+
+</body>
+
+</html>
+
