@@ -5,6 +5,8 @@ The Logic Gates of True AI
 
 Video: https://www.youtube.com/watch?v=BNRs9vb24us
 
+Use App: https://christopherandrewtopalian.github.io/CATopalian_JavaScript_True_AI_Logic_Gates/CATopalian_JavaScript_True_AI_Logic_Gates.html
+
 ![001](src/media/textures/screenshots/001.PNG)
 
 ![002](src/media/textures/screenshots/002.PNG)
